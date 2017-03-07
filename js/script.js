@@ -1,5 +1,6 @@
 window.onload = function(){
 	var winW = window.innerWidth;
+	var winH = window.innerHeight;
 	var bar_img = document.getElementsByClassName('bar-imgs')[0];
 	var bar_img_divs = bar_img.getElementsByTagName('div');
 	bar_img_divs = Array.from(bar_img_divs);
@@ -394,18 +395,34 @@ window.onload = function(){
 			var year = right.getElementsByTagName('strong')[0];
 			var p = left.getElementsByTagName('p')[0];
 			
+			info.style.color = data[who].info.color;
 			year.innerHTML = data[who].info.date;
 			name.innerHTML = data[who].info.first + '<strong> ' + data[who].info.last + '</strong>';
 			p.innerHTML = data[who].info.word;
 			var str = '';
 			for(var attr in data[who].info){
-				if( attr != 'first' && attr != 'last' && attr != 'word' && attr != 'date' ){
+				if( attr != 'first' && attr != 'last' && attr != 'word' && attr != 'date' && attr != 'color' ){
 					str += '<li>' + attr + ': ' + data[who].info[attr] + '</li>';
 				}
 			}
 			ul.innerHTML = str;
 		};
 		
+		/*-------------face随鼠标移动----------------*/		
+		
+		document.addEventListener('mousemove',move);
+		function move(ev){
+			var t = (ev.pageY - winH/2)*0.008;
+			var l = (ev.pageX - winW/2)*0.008;
+			
+			svgs[0].style.left = -l + 'px';
+			svgs[0].style.top = -t + 'px';
+			
+			for(var i=1;i<svgs.length;i++){
+				svgs[i].style.left = l + 'px';
+				svgs[i].style.top = t + 'px';
+			}
+		}
 	})();
 }
 
