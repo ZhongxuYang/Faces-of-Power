@@ -15,54 +15,7 @@ function move(obj,attrs,duration,fx,endFn){
 		j[attr].b = parseFloat(getComputedStyle(obj)[attr]);
 		j[attr].c = attrs[attr] - j[attr].b;
 	}
-	//起始位置begin,获取元素当前的位置
-	//var b = parseFloat(getComputedStyle(obj)[attr]);
-	//目标点count，要运动到的位置（传入）
-	//var c = target-b;
-	//持续时间duration,毫秒（几毫秒运动完，传入）
-	var d = duration;
-	//开始运动的时间（获取运动开始执行时候的时间）
-	var newTime = new Date().getTime();
-	obj.time = setInterval(function(){
-		//运动了多少时间，当前时间-开始的时间 = 运动了多少时间
-		var t = new Date().getTime() - newTime;
-		// 每次运动到的位置，开始位置+要运动的距离/总时间*运动了多少时间
-		if(t >= d){
-			t = d;
-		}
-		for(var attr in j){
-			var b = j[attr].b;
-			var c = j[attr].c;
-			var v = Tween[fx](t, b, c, d);
-			if(attr == 'opacity'){
-				obj.style[attr] = v;
-			}else{
-				obj.style[attr] = v +'px';
-			}
-		}
-		//var v = b+ c/d*t;
-		//如果运动的时间大于总时间，说明运动到指定位置了
-		if(t == d){
-			//有可能运动超出目标点，所以强制等于目标点
-			//到达目标点，关闭定时器
-			clearInterval(obj.time);
-			endFn && endFn();
-		}
-		
-		
-//		if(t >= duration){
-//			//如果有回调函数，返回后边的，也就是执行回调函数
-//			//如果没有回调函数，就返回前边，不执行了
-//			
-//		}
-	},20);
-}
-var Tween = {
-    linear: function (t, b, c, d){  //匀速
-        return c*t/d + b;
-    },
-    easeIn: function(t, b, c, d){  //加速曲线
-        return c*(t/=d)*t + b;
+	//起始位置begin,获取元
     },
     easeOut: function(t, b, c, d){  //减速曲线
         return -c *(t/=d)*(t-2) + b;
