@@ -409,3 +409,15 @@ rect{
 	background: url(../img/star-bg.svg) no-repeat;
 	background-size: 30px 30px;
 }
+/*  about_me  */
+#about_me_box{
+	width: 100vw;
+	height: 100vh;
+	display: none;
+}
+#about_me{
+	transition: 2s;
+	-webkit-transition: 2s;
+	transform: scale(0.1);
+	-webkit-transform: scale(0.1);
+}
